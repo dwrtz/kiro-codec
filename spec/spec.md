@@ -66,8 +66,9 @@ fixture under `tests/fixtures/spekkr/` that has no `error.txt`.
 `design.md` is copied with the safety block from `design.md` of this spec
 at offset 0. The block is always the same bytes, including one blank line
 after `<!-- spekkr:safety:end -->`. `to-spekkr` removes exactly those bytes
-when `design.md` starts with them, and leaves `design.md` untouched
-otherwise.
+when `design.md` starts with them. A `design.md` that does not start with
+`<!-- spekkr:safety:begin -->` is left untouched. One that starts with the
+begin marker but not the full block is an error, on both commands.
 
 The block tells the agent to show the person the commands and secrets
 under `safety`, to treat `spekkr.inputs.json` as requirements, and not to
@@ -140,9 +141,11 @@ after the path is resolved, so `.` and `..` give that directory's own name.
 The default output folder is `./<slug>`.
 
 A hand-written `requirements.md` becomes `spec.md` byte for byte. A
-hand-written `design.md` that does not start with the safety block becomes
-Spekkr `design.md` byte for byte. One that starts with the full block loses
-exactly that block.
+hand-written `design.md` that does not start with
+`<!-- spekkr:safety:begin -->` becomes Spekkr `design.md` byte for byte.
+One that starts with the full block loses exactly that block. One that
+starts with the begin marker but not the full block is refused, and this
+requirement does not apply to it.
 
 **Accept when:** for every hand-written fixture under
 `tests/fixtures/handwritten/` that has no `error.txt`, with
@@ -188,12 +191,16 @@ The codec does not promote a `##` heading to the manifest name. With no
 
 `to-kiro` refuses a Spekkr spec that already has `requirements.md`, and a
 `design.md` that starts with `<!-- spekkr:safety:begin -->`. `to-spekkr`
-refuses a feature folder that already has `spec.md`. Each failure is a
-non-zero exit, one `error:` line on stderr, and no output folder.
+refuses a feature folder that already has `spec.md`. It also refuses a
+`design.md` that starts with `<!-- spekkr:safety:begin -->` but is not the
+full safety block. Each failure is a non-zero exit, one `error:` line on
+stderr, and no output folder.
 
 **Accept when:** `collision-requirements`, `collision-safety-marker`, and
 `collision-spec` exit non-zero, their stderr equals the case's `error.txt`,
-and they leave no output folder.
+and they leave no output folder. A feature `design.md` that starts with the
+begin marker but not the full block fails `to-spekkr` with the error in
+`design.md` and leaves no output folder.
 
 ### R9. No reformatting
 

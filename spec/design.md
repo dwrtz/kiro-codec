@@ -25,7 +25,7 @@ steering helpers named below. The checker imports them.
 | Spekkr | Kiro feature folder | Back to Spekkr |
 | --- | --- | --- |
 | `spec.md` | `requirements.md`, same bytes | copied back as `spec.md` |
-| `design.md` | `design.md`, safety block at offset 0 | block removed when `design.md` starts with it |
+| `design.md` | `design.md`, safety block at offset 0 | full block removed when `design.md` starts with it. A begin marker that is not the full block is an error |
 | `tasks.md` | same bytes, when the file exists | copied back |
 | every other file | same relative path, same bytes | copied back |
 | `spekkr.json`, `spekkr.inputs.json`, `BUILD.md` | same names inside the feature folder | restored as is |
@@ -101,8 +101,11 @@ inventing structure in an unspecified file.
 
 `to-spekkr` deletes the prefix only when `design.md` starts with the full
 `SAFETY_BLOCK`. A file that starts with `SAFETY_BEGIN` but not the full
-block is copied unchanged. `to-kiro` refuses a Spekkr `design.md` that
-starts with `SAFETY_BEGIN`, so the block is never doubled.
+block is refused. Copying it would produce a Spekkr `design.md` that
+`to-kiro` also refuses, so the fixed point in R6 would not hold.
+`to-kiro` refuses a Spekkr `design.md` that starts with `SAFETY_BEGIN`,
+so the block is never doubled. A design that does not start with
+`SAFETY_BEGIN` is left unchanged.
 
 ## requirements.md
 
@@ -429,6 +432,7 @@ stdout, and no output folder. Steering files are included in "no output".
 | Spekkr folder has `requirements.md` | `this Spekkr spec already has requirements.md; to-kiro will not overwrite it` |
 | Spekkr `design.md` starts with the begin marker | `design.md already starts with <!-- spekkr:safety:begin -->; to-kiro will not add the safety block again` |
 | Feature folder has `spec.md` | `feature folder already has spec.md; to-spekkr will not overwrite it` |
+| Feature `design.md` starts with the begin marker but not the full block | `design.md starts with <!-- spekkr:safety:begin --> but is not the safety block; to-spekkr will not convert it` |
 | No `spekkr.json` and no `--author` | `--author is required when the feature folder has no spekkr.json` |
 | A directory or file cannot be read | `cannot read <path>: <reason>` |
 | Spekkr folder has no `spekkr.json` | `no spekkr.json in the Spekkr spec folder` |
@@ -525,8 +529,8 @@ Flag checks:
 - `.` and `..` use the directory name, as in R6.
 - An unreadable directory aborts with `error: cannot read ` and writes
   nothing. Skipped when the checker is root.
-- A `design.md` that starts with `SAFETY_BEGIN` but not `SAFETY_BLOCK` is
-  copied unchanged by `to-spekkr`.
+- A `design.md` that starts with `SAFETY_BEGIN` but not `SAFETY_BLOCK` makes
+  `to-spekkr` exit non-zero, print `error: design.md starts with <!-- spekkr:safety:begin --> but is not the safety block; to-spekkr will not convert it`, and write nothing. That input is outside the R6 fixed point.
 - `product_markdown` on a manifest with no `summary` omits the Summary
   line.
 - The repository README contains `SAFETY_BLOCK` when the checker is the
