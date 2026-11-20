@@ -1,0 +1,1 @@
+- [ ] Keep the manifest bytes.

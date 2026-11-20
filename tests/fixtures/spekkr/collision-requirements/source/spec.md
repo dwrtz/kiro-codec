@@ -1,0 +1,3 @@
+# Collision
+
+Both names exist.

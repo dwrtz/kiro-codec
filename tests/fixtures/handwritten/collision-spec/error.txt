@@ -1,0 +1,1 @@
+error: feature folder already has spec.md; to-spekkr will not overwrite it

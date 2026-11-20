@@ -1,0 +1,47 @@
+{
+  "spekkr": 1,
+  "id": "example-user/pebble-jar",
+  "name": "Pebble jar",
+  "summary": "A jar that counts pebbles.",
+  "kind": "CLI tool",
+  "version": "0.1.0",
+  "author": {
+    "id": "example-user",
+    "name": "Example User"
+  },
+  "targets": {
+    "platforms": [
+      "cli"
+    ],
+    "stack": [
+      "Python 3.11+",
+      "Python standard library"
+    ]
+  },
+  "files": [
+    {
+      "path": "spec.md"
+    },
+    {
+      "path": "design.md"
+    },
+    {
+      "path": "tasks.md"
+    },
+    {
+      "path": "spekkr.inputs.json"
+    }
+  ],
+  "changelog": [
+    {
+      "version": "0.1.0",
+      "date": "2026-01-15",
+      "note": "Synthetic fixture."
+    }
+  ],
+  "customize": {
+    "lid": {
+      "about": "Whether the jar has a lid."
+    }
+  }
+}
