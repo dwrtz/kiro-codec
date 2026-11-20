@@ -1,0 +1,73 @@
+{
+  "spekkr": 1,
+  "id": "dwrtz/kiro-codec",
+  "name": "Kiro codec",
+  "summary": "Converts a Spekkr spec folder to a Kiro feature folder and back, byte for byte. One Python script and an agent skill.",
+  "keywords": [
+    "kiro",
+    "converter",
+    "codec",
+    "lossless",
+    "round trip",
+    "feature folder",
+    "steering",
+    "agent skill",
+    "spec-driven development",
+    "python"
+  ],
+  "kind": "CLI tool",
+  "version": "0.1.0",
+  "author": {
+    "id": "dwrtz",
+    "name": "dwrtz"
+  },
+  "license": "MIT",
+  "targets": {
+    "platforms": [
+      "cli"
+    ],
+    "stack": [
+      "Python 3.11+",
+      "Python standard library",
+      "Kiro"
+    ]
+  },
+  "customize": {},
+  "files": [
+    {
+      "path": "spec.md",
+      "about": "Requirements R1-R14 with acceptance checks: feature folder, byte-for-byte sidecar, safety block, requirements.md, steering, the hand-written fixed point, the filled-in manifest, collisions, no reformatting, edge bytes, all-or-nothing writes, the warning, the agent skill, and the checker."
+    },
+    {
+      "path": "design.md",
+      "about": "Command line, mapping, sidecar, safety block bytes, steering rules, Kiro citations, filled-in manifest, every error message, the checker, and unverified Kiro behavior."
+    },
+    {
+      "path": "tasks.md",
+      "about": "Build order. Each step has a check. This version ships no reference implementation."
+    }
+  ],
+  "needs": {
+    "permissions": [
+      "shell"
+    ]
+  },
+  "demo": {},
+  "safety": {
+    "commands": [
+      "python3 kiro_codec.py --help",
+      "python3 tests/check.py",
+      "python3 tests/check.py <your_codec.py>",
+      "python3 kiro_codec.py to-kiro <spekkr-folder> [--dir <feature-folder>] [--steering]",
+      "python3 kiro_codec.py to-spekkr <feature-folder> [--dir <spekkr-folder>] [--author <username>] [--date <YYYY-MM-DD>] [--platforms <list>]"
+    ]
+  },
+  "lineage": {},
+  "changelog": [
+    {
+      "version": "0.1.0",
+      "date": "2026-11-20",
+      "note": "First version. Spec only. Kiro docs checked 20 November 2026. No codec in this folder yet."
+    }
+  ]
+}
