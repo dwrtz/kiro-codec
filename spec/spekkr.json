@@ -16,7 +16,7 @@
     "python"
   ],
   "kind": "CLI tool",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "id": "dwrtz",
     "name": "dwrtz"
@@ -64,6 +64,11 @@
   },
   "lineage": {},
   "changelog": [
+    {
+      "version": "0.1.1",
+      "date": "2026-11-20",
+      "note": "to-spekkr now refuses a design.md that starts with the safety marker but is not the full safety block, so the round trip stays exact. A tested implementation is at github.com/dwrtz/kiro-codec."
+    },
     {
       "version": "0.1.0",
       "date": "2026-11-20",
