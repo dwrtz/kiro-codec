@@ -1,0 +1,39 @@
+{
+  "spekkr": 1,
+  "id": "example-user/ears",
+  "name": "ears",
+  "summary": "WHEN a person opens the lantern THE SYSTEM SHALL show the flame",
+  "version": "0.1.0",
+  "author": {
+    "id": "example-user",
+    "name": "example-user"
+  },
+  "targets": {
+    "platforms": [
+      "web"
+    ]
+  },
+  "customize": {},
+  "files": [
+    {
+      "path": "spec.md"
+    },
+    {
+      "path": "design.md"
+    },
+    {
+      "path": "tasks.md"
+    }
+  ],
+  "needs": {},
+  "demo": {},
+  "safety": {},
+  "lineage": {},
+  "changelog": [
+    {
+      "version": "0.1.0",
+      "date": "2026-01-01",
+      "note": "Converted from Kiro."
+    }
+  ]
+}
