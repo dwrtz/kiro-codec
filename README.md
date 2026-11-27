@@ -1,5 +1,7 @@
 # kiro-codec
 
+[![Built from a Spekkr spec](https://img.shields.io/badge/built%20from-Spekkr%20spec-f0442b)](https://spekkr.com/dwrtz/kiro-codec/)
+
 Converts a Spekkr spec folder to a Kiro feature folder and back, byte for byte. One Python script, `kiro_codec.py`, and an agent skill at `skills/kiro-codec/SKILL.md`.
 
 Python 3.11 or newer. The standard library only.
